@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "dev": "webpack-dev-server --config ./bundler/webpack.dev.js",
+    "depcheck": "depcheck"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "glslify-loader": "^2.0.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.5.2",
+    "postprocessing": "^6.23.2",
+    "prettier": "^2.4.1",
+    "raw-loader": "^4.0.1",
+    "style-loader": "^1.2.1",
+    "three": "^0.134",
+    "ts-loader": "^9.2.6",
+    "webpack": "^5.63.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@types/three": "^0.134.0",
+    "depcheck": "^1.4.2",
+    "typescript": "^4.4.4"
+  }
+}
