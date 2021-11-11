@@ -5,25 +5,11 @@
             "scale": 0.06625,
             "rotationSpeed": -0.007
         },
-        { "color": "rgba(120, 120, 220)", "scale": 0.125, "rotationSpeed": -0.015 },
         { "color": "rgba(140, 120, 220)", "scale": 0.25, "rotationSpeed": -0.03 },
         { "color": "rgba(100, 75, 200)", "scale": 0.5, "rotationSpeed": -0.0175 },
         { "color": "rgba(120, 75, 180)" },
         { "color": "rgba(80, 35, 160)", "scale": 2, "rotationSpeed": -0.03 },
         { "color": "rgba(130, 35, 140)", "scale": 4, "rotationSpeed": -0.0175 },
-        { "color": "rgba(60, 25, 120)", "scale": 8, "rotationSpeed": -0.015 },
-        { "color": "rgba(100, 25, 100)", "scale": 16, "rotationSpeed": -0.007 },
-        { "color": "rgba(40, 15, 80)", "scale": 32, "rotationSpeed": -0.005 },
-        { "color": "rgba(70, 15, 60)", "scale": 64, "rotationSpeed": -0.003 },
-        { "color": "rgba(20, 5, 40)", "scale": 128, "rotationSpeed": -0.001 },
-        { "color": "rgba(50, 5, 30)", "scale": 256, "rotationSpeed": -0.0005 },
-        { "color": "rgba(10, 1, 20)", "scale": 512, "rotationSpeed": -0.00025 },
-        { "color": "rgba(40, 1, 10)", "scale": 1024, "rotationSpeed": -0.000125 },
-        { "color": "rgba(120, 120, 220)", "scale": 0.125, "rotationSpeed": -0.015 },
-        { "color": "rgba(140, 120, 220)", "scale": 0.25, "rotationSpeed": -0.03 },
-        { "color": "rgba(100, 75, 200)", "scale": 0.5, "rotationSpeed": -0.0175 },
-        { "color": "rgba(120, 75, 180)" },
-        { "color": "rgba(80, 35, 160)", "scale": 2, "rotationSpeed": -0.03 },
-        { "color": "rgba(130, 35, 140)", "scale": 4, "rotationSpeed": -0.0175 }
+        { "color": "rgba(60, 25, 120)", "scale": 8, "rotationSpeed": -0.015 }
     ]
 }

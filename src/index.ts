@@ -19,7 +19,7 @@ function createScene() {
         window.innerWidth / window.innerHeight,
         0.1
     );
-    camera.position.z = 5;
+    camera.position.z = 4.25;
 
     return { camera, renderer, scene };
 }
