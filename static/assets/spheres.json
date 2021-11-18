@@ -1,0 +1,10 @@
+{
+    "sceneObjects": [
+        {
+            "color": "rgba(140, 160, 250)",
+            "scale": 0.06625,
+            "rotationSpeed": -0.007
+        },
+        { "color": "rgba(255, 255, 120)", "scale": 4, "rotationSpeed": -0.015 }
+    ]
+}

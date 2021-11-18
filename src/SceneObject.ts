@@ -5,7 +5,7 @@ export type Dummy = {
     rotate: () => void;
 };
 
-export function Cube(
+export function SceneObject(
     parent: Scene,
     { position = [0, 0, 0], scale = 1, rotationSpeed = 0.05 },
     { geometry, material }

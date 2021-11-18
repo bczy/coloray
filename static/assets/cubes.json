@@ -1,5 +1,5 @@
 {
-    "cubes": [
+    "sceneObjects": [
         {
             "color": "rgba(140, 160, 250)",
             "scale": 0.06625,
