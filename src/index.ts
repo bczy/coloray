@@ -13,6 +13,7 @@ import { RenderPass } from './postprocessing/RenderPass';
 import { GlitchPass } from './postprocessing/GlitchPass';
 import { FilmPass } from './postprocessing/FilmPass';
 import { SMAAPass } from './postprocessing/SMAAPass';
+import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
 import { Dummy, SceneObject } from './SceneObject';
 
@@ -48,6 +49,9 @@ function initScene() {
     const smaaPass = new SMAAPass( window.innerWidth * renderer.getPixelRatio(), window.innerHeight * renderer.getPixelRatio() );
     composer.addPass( smaaPass );
     
+    const bloomPass = new UnrealBloomPass();
+    composer.addPass( bloomPass );
+
     return { camera, composer, scene };
 }
 
