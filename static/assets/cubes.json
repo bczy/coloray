@@ -1,4 +1,64 @@
 {
     "sceneObjects": [
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [0, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [3, 3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [-3, 3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [3, -3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [-3, -3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [-3, -3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [4.5, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [-4.5, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [0, 4.5, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [0, -4.5, 0],
+            "rotationSpeed": -0.05
+        }
     ]
 }
