@@ -13,6 +13,7 @@ import { RenderPass } from './postprocessing/RenderPass';
 import { GlitchPass } from './postprocessing/GlitchPass';
 import { FilmPass } from './postprocessing/FilmPass';
 import { SMAAPass } from './postprocessing/SMAAPass';
+import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
 import { SceneObjectProps, SceneObject } from './SceneObject';
 
@@ -39,17 +40,21 @@ function initScene(): { scene: Scene, camera: PerspectiveCamera, composer: WebGL
     composer.addPass(renderPass);
 
     const glitchPass = new GlitchPass(32);
-    composer.addPass(glitchPass);
 
-    const filmPass = new FilmPass(0.75, 2.5, 2.5, false);
-    composer.addPass(filmPass);
 
-    const smaaPass = new SMAAPass(
-        window.innerWidth * renderer.getPixelRatio(),
-        window.innerHeight * renderer.getPixelRatio()
-    );
-    composer.addPass(smaaPass);
-    window.addEventListener('resize', () => onWindowResize(camera, renderer));
+
+    composer.addPass( glitchPass );
+
+    const filmPass = new FilmPass( 0.75, 2.5, 2.5, false );
+    composer.addPass( filmPass );
+    
+    const smaaPass = new SMAAPass( window.innerWidth * renderer.getPixelRatio(), window.innerHeight * renderer.getPixelRatio() );
+    composer.addPass( smaaPass );
+    
+    const bloomPass = new UnrealBloomPass();
+    composer.addPass( bloomPass );
+
+
     return { camera, composer, scene };
 }
 
