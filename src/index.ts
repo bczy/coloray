@@ -5,7 +5,7 @@ import {
     BoxGeometry,
     MeshBasicMaterial,
     BufferGeometry,
-    SphereGeometry
+    SphereGeometry,
 } from 'three';
 
 import { EffectComposer } from './postprocessing/EffectComposer';
@@ -15,16 +15,15 @@ import { FilmPass } from './postprocessing/FilmPass';
 import { SMAAPass } from './postprocessing/SMAAPass';
 import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
-import { Dummy, SceneObject } from './SceneObject';
+import { SceneObjectProps, SceneObject } from './SceneObject';
 
-
-function onWindowResize(camera: PerspectiveCamera, renderer: WebGLRenderer) {
+function onWindowResize(camera: PerspectiveCamera, renderer: WebGLRenderer) : void{
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function initScene() {
+function initScene(): { scene: Scene, camera: PerspectiveCamera, composer: WebGLRenderer } {
     const scene = new Scene();
     const renderer = new WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,12 +34,15 @@ function initScene() {
         window.innerWidth / window.innerHeight,
         0.1
     );
-    camera.position.z = 5;
-    const composer = new EffectComposer( renderer );
-    const renderPass = new RenderPass( scene, camera );
-    composer.addPass( renderPass );
+    camera.position.z = 7.5;
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
 
     const glitchPass = new GlitchPass(32);
+
+
+
     composer.addPass( glitchPass );
 
     const filmPass = new FilmPass( 0.75, 2.5, 2.5, false );
@@ -52,6 +54,7 @@ function initScene() {
     const bloomPass = new UnrealBloomPass();
     composer.addPass( bloomPass );
 
+
     return { camera, composer, scene };
 }
 
@@ -61,8 +64,12 @@ function createMaterial(color: number) {
     return material;
 }
 
-async function initSceneObjects(scene, jsonPath: string, geometry: BufferGeometry){
-    const {sceneObjects} = await (await fetch(jsonPath)).json();
+async function initSceneObjects(
+    scene,
+    jsonPath: string,
+    geometry: BufferGeometry
+) : Promise<Array<typeof SceneObject>>{
+    const { sceneObjects } = await (await fetch(jsonPath)).json();
     return sceneObjects.map(
         (sceneObject: {
             color?: number;
@@ -70,34 +77,28 @@ async function initSceneObjects(scene, jsonPath: string, geometry: BufferGeometr
             scale?: number;
             rotation?: number;
         }) => {
-            const material = createMaterial(sceneObject.color)
+            const material = createMaterial(sceneObject.color);
             return SceneObject(scene, sceneObject, { geometry, material });
         }
-    );    
+    );
 }
 
-async function initCubes(scene: Scene) {
-    const geometry = new BoxGeometry();
-    return await initSceneObjects(scene, '/assets/cubes.json', geometry);
-}
-async function initSpheres(scene: Scene) {
-    const geometry = new SphereGeometry(undefined, 8, 8);
-    return await initSceneObjects(scene, '/assets/spheres.json', geometry);
-}
 
 function animate(
     scene: Scene,
     camera: PerspectiveCamera,
     composer: EffectComposer,
-    sceneObjects: Array<Dummy>,
+    sceneObjects: Array<SceneObjectProps>,
     step = 0
-) : void {
+): void {
     step++;
-    sceneObjects.forEach((cube: { rotate: (arg0: number) => any }) =>
-        cube.rotate(step)
-    );
+    sceneObjects.forEach((cube: SceneObjectProps) => {
+        cube.animate(step);
+    });
     composer.render(scene, camera);
-    requestAnimationFrame(() => animate(scene, camera, composer, sceneObjects, step));
+    requestAnimationFrame(() =>
+        animate(scene, camera, composer, sceneObjects, step)
+    );
 }
 
 async function init() {
@@ -105,8 +106,8 @@ async function init() {
     const { camera, composer, scene } = initScene();
 
     const gameObjects = [];
-    const cubes = await initCubes(scene);
-    const spheres = await initSpheres(scene);
+    const spheres = await initSceneObjects(scene, '/assets/spheres.json', new SphereGeometry(undefined, 6, 6));
+    const cubes = await initSceneObjects(scene, '/assets/cubes.json', new BoxGeometry(5,5,5));
     gameObjects.push(...cubes, ...spheres);
 
     window.addEventListener(
@@ -114,7 +115,7 @@ async function init() {
         () => onWindowResize(camera, composer),
         false
     );
-    animate(scene, camera, composer, gameObjects, spheres);
+    animate(scene, camera, composer, gameObjects, 0);
 }
 
 init();

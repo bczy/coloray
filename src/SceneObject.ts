@@ -1,20 +1,21 @@
 import { Mesh, Scene } from 'three';
 
-export type Dummy = {
+export type SceneObjectProps = {
     mesh: Mesh;
-    rotate: () => void;
+    animate: (step: number) => void;
 };
 
 export function SceneObject(
     parent: Scene,
     { position = [0, 0, 0], scale = 1, rotationSpeed = 0.05 },
     { geometry, material }
-) : Dummy {
+): SceneObjectProps {
     const dummy = {
         mesh: new Mesh(geometry, material),
-        rotate: function () {
+        animate: function (step: number) {
             this.mesh.rotation.x += rotationSpeed;
             this.mesh.rotation.y -= rotationSpeed;
+            this.mesh.position.z = this.mesh.position.z + (Math.sin(step / 10) / 130) * rotationSpeed * 2;
         },
     };
 
@@ -24,7 +25,7 @@ export function SceneObject(
     dummy.mesh.scale.x = scale;
     dummy.mesh.scale.y = scale;
     dummy.mesh.scale.z = scale;
-    dummy.mesh.userData['type'] = 'cube';
+    dummy.mesh.userData['type'] = geometry.type;
     parent.add(dummy.mesh);
     return dummy;
 }

@@ -1,10 +1,90 @@
 {
     "sceneObjects": [
         {
-            "color": "rgba(140, 160, 250)",
-            "scale": 0.06625,
-            "rotationSpeed": -0.007
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [2, 0, 0],
+            "rotationSpeed": -0.05
         },
-        { "color": "rgba(255, 255, 120)", "scale": 4, "rotationSpeed": -0.015 }
+        {
+            "color": "rgba(0, 255, 120)",
+            "scale": 0.25,
+            "position": [0, 2, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [-2, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(0, 0, 255)",
+            "scale": 0.25,
+            "position": [0, -2, 0],
+            "rotationSpeed": 0.05
+        },
+
+
+        {
+            "color": "rgba(255, 255, 120)",
+            "scale": 0.25,
+            "position": [-6, 3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(0, 255, 120)",
+            "scale": 0.25,
+            "position": [6, -3, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [6, 3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgba(0, 0, 255)",
+            "scale": 0.25,
+            "position": [-6, -3, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(0, 255, 120)",
+            "scale": 0.25,
+            "position": [-7, 0, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [7, 0, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [-3, -5, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [-3, 5, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [3, -5, 0],
+            "rotationSpeed": 0.05
+        },
+        {
+            "color": "rgba(120, 0, 120)",
+            "scale": 0.25,
+            "position": [3, 5, 0],
+            "rotationSpeed": 0.05
+        }
     ]
 }
