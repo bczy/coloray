@@ -3,7 +3,6 @@ import {
     PerspectiveCamera,
     WebGLRenderer,
     BoxGeometry,
-    MeshBasicMaterial,
     BufferGeometry,
     SphereGeometry,
 } from 'three';
@@ -15,15 +14,22 @@ import { FilmPass } from './postprocessing/FilmPass';
 import { SMAAPass } from './postprocessing/SMAAPass';
 import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
-import { SceneObjectProps, BasicMesh } from './graphics/BasicMesh';
+import { SceneObjectProps, BasicMesh, BasicMeshProps } from './graphics/BasicMesh';
 
-function onWindowResize(camera: PerspectiveCamera, renderer: WebGLRenderer) : void{
+function onWindowResize(
+    camera: PerspectiveCamera,
+    renderer: WebGLRenderer
+): void {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function initScene(): { scene: Scene, camera: PerspectiveCamera, composer: WebGLRenderer } {
+function initScene(): {
+    scene: Scene;
+    camera: PerspectiveCamera;
+    composer: WebGLRenderer;
+} {
     const scene = new Scene();
     const renderer = new WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,49 +41,39 @@ function initScene(): { scene: Scene, camera: PerspectiveCamera, composer: WebGL
         0.1
     );
     camera.position.z = 7.5;
-    const composer = new EffectComposer(renderer);
-    const renderPass = new RenderPass(scene, camera);
-    composer.addPass(renderPass);
 
-    const glitchPass = new GlitchPass(32);
-
-
-
-    composer.addPass( glitchPass );
-
-    const filmPass = new FilmPass( 0.75, 2.5, 2.5, false );
-    composer.addPass( filmPass );
-    
-    const smaaPass = new SMAAPass( window.innerWidth * renderer.getPixelRatio(), window.innerHeight * renderer.getPixelRatio() );
-    composer.addPass( smaaPass );
-    
-    const bloomPass = new UnrealBloomPass();
-    composer.addPass( bloomPass );
-
+    const composer = initPostProcess(renderer, scene, camera);
 
     return { camera, composer, scene };
 }
 
+function initPostProcess(
+    renderer: WebGLRenderer,
+    scene: Scene,
+    camera: PerspectiveCamera
+): EffectComposer {
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass({x: 256, y: 256}, 2));
+    composer.addPass(new FilmPass(0.5, 2.5, 1024, false));
+    composer.addPass(new GlitchPass(32));
+    return composer;
+}
 
 async function initSceneObjects(
     scene,
     jsonPath: string,
     geometry: BufferGeometry
-) : Promise<Array<typeof BasicMesh>>{
-    const { sceneObjects : SceneDataObject }= await (await fetch(jsonPath)).json();
+): Promise<Array<typeof BasicMesh>> {
+    const { sceneObjects } = await (await fetch(jsonPath)).json();
     return sceneObjects.map(
-        (sceneObject: {
-            color?: number;
-            position?: Array<number>;
-            scale?: number;
-            rotation?: number;
-        }) => {
-            const basicMesh = new BasicMesh(scene, geometry, {sceneObject},  { sceneObject } );
+        (sceneObject: BasicMeshProps) => {
+            const { position, scale, rotation, color } = sceneObject;
+            const basicMesh = new BasicMesh(scene, geometry, rotation, color, position, scale);
             return basicMesh;
         }
     );
 }
-
 
 function animate(
     scene: Scene,
@@ -101,8 +97,16 @@ async function init() {
     const { camera, composer, scene } = initScene();
 
     const gameObjects = [];
-    const spheres = await initSceneObjects(scene, '/assets/spheres.json', new SphereGeometry(undefined, 6, 6));
-    const cubes = await initSceneObjects(scene, '/assets/cubes.json', new BoxGeometry(5,5,5));
+    const spheres = await initSceneObjects(
+        scene,
+        '/assets/spheres.json',
+        new SphereGeometry(undefined, 6, 6)
+    );
+    const cubes = await initSceneObjects(
+        scene,
+        '/assets/cubes.json',
+        new BoxGeometry(5, 5, 5)
+    );
     gameObjects.push(...cubes, ...spheres);
 
     window.addEventListener(
