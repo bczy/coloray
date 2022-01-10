@@ -15,7 +15,7 @@ import { FilmPass } from './postprocessing/FilmPass';
 import { SMAAPass } from './postprocessing/SMAAPass';
 import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
-import { SceneObjectProps, SceneObject } from './SceneObject';
+import { SceneObjectProps, BasicMesh } from './graphics/BasicMesh';
 
 function onWindowResize(camera: PerspectiveCamera, renderer: WebGLRenderer) : void{
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -58,18 +58,13 @@ function initScene(): { scene: Scene, camera: PerspectiveCamera, composer: WebGL
     return { camera, composer, scene };
 }
 
-function createMaterial(color: number) {
-    const material = new MeshBasicMaterial({ color });
-    material.wireframe = true;
-    return material;
-}
 
 async function initSceneObjects(
     scene,
     jsonPath: string,
     geometry: BufferGeometry
-) : Promise<Array<typeof SceneObject>>{
-    const { sceneObjects } = await (await fetch(jsonPath)).json();
+) : Promise<Array<typeof BasicMesh>>{
+    const { sceneObjects : SceneDataObject }= await (await fetch(jsonPath)).json();
     return sceneObjects.map(
         (sceneObject: {
             color?: number;
@@ -77,8 +72,8 @@ async function initSceneObjects(
             scale?: number;
             rotation?: number;
         }) => {
-            const material = createMaterial(sceneObject.color);
-            return SceneObject(scene, sceneObject, { geometry, material });
+            const basicMesh = new BasicMesh(scene, geometry, {sceneObject},  { sceneObject } );
+            return basicMesh;
         }
     );
 }
