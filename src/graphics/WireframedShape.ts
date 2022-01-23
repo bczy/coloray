@@ -5,14 +5,14 @@ export type SceneObjectProps = {
     animate: (step: number) => void;
 };
 
-export type BasicMeshProps = {
+export type WireframedShapeProps = {
     color?: number;
     position?: number[];
     rotation?: { x: number; y: number; z: number };
     scale?: number;
 };
 
-export class BasicMesh {
+export class WireframedShape {
     private mesh : Mesh;
     constructor(
         private parent: Scene,
@@ -33,13 +33,12 @@ export class BasicMesh {
         this.createMaterial(this.color);
         this.parent.add(this.mesh);
     }
-
-    animate(step: number) {
+    getWireframedMesh() : Mesh{
+        return this.mesh;
+    }
+    animate() {
         this.mesh.rotation.x += this.rotationSpeed.x;
-        this.mesh.rotation.y -= this.rotationSpeed.y;
-        this.mesh.position.z =
-            this.mesh.position.z +
-            (Math.sin(step / 10) / 130) * this.rotationSpeed.y * 2;
+        this.mesh.rotation.y += this.rotationSpeed.y;
     }
 
     createMaterial(color: number) : void {

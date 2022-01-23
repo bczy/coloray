@@ -3,7 +3,6 @@ import {
     PerspectiveCamera,
     WebGLRenderer,
     BoxGeometry,
-    BufferGeometry,
     SphereGeometry,
 } from 'three';
 
@@ -11,10 +10,9 @@ import { EffectComposer } from './postprocessing/EffectComposer';
 import { RenderPass } from './postprocessing/RenderPass';
 import { GlitchPass } from './postprocessing/GlitchPass';
 import { FilmPass } from './postprocessing/FilmPass';
-import { SMAAPass } from './postprocessing/SMAAPass';
 import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
-import { SceneObjectProps, BasicMesh, BasicMeshProps } from './graphics/BasicMesh';
+import { Layer } from './graphics/Layer';
 
 type SceneProps = {
     scene: Scene;
@@ -61,35 +59,20 @@ function initPostProcess(
     return composer;
 }
 
-async function initSceneObjects(
-    scene,
-    jsonPath: string,
-    geometry: BufferGeometry
-): Promise<Array<typeof BasicMesh>> {
-    const { sceneObjects } = await (await fetch(jsonPath)).json();
-    return sceneObjects.map(
-        (sceneObject: BasicMeshProps) => {
-            const { position, scale, rotation, color } = sceneObject;
-            const basicMesh = new BasicMesh(scene, geometry, rotation, color, position, scale);
-            return basicMesh;
-        }
-    );
-}
-
 function animate(
     scene: Scene,
     camera: PerspectiveCamera,
     composer: EffectComposer,
-    sceneObjects: Array<SceneObjectProps>,
+    sceneLayers: Array<Layer>,
     step = 0
 ): void {
     step++;
-    sceneObjects.forEach((cube: SceneObjectProps) => {
-        cube.animate(step);
+    sceneLayers.forEach((layer: Layer) => {
+        layer.animate(step);
     });
     composer.render(scene);
     requestAnimationFrame(() =>
-        animate(scene, camera, composer, sceneObjects, step)
+        animate(scene, camera, composer, sceneLayers, step)
     );
 }
 
@@ -97,25 +80,27 @@ async function init() {
     document.body.style.margin = '0';
     const { camera, composer, scene } = initScene();
 
-    const gameObjects = [];
-    const spheres = await initSceneObjects(
+    const sceneLayers = new Array<Layer>();
+    const sphereLayer = new Layer(scene);
+    await sphereLayer.addFromJson(
         scene,
         '/assets/spheres.json',
         new SphereGeometry(undefined, 6, 6)
     );
-    const cubes = await initSceneObjects(
+    const cubeLayer = new Layer(scene, {x: -0.01, y: -0.01, z: 0});
+    await cubeLayer.addFromJson(
         scene,
         '/assets/cubes.json',
         new BoxGeometry(5, 5, 5)
     );
-    gameObjects.push(...cubes, ...spheres);
+    sceneLayers.push(sphereLayer, cubeLayer);
 
     window.addEventListener(
         'resize',
         () => onWindowResize(camera, composer.renderer),
         false
     );
-    animate(scene, camera, composer, gameObjects, 0);
+    animate(scene, camera, composer, sceneLayers, 0);
 }
 
 init();
