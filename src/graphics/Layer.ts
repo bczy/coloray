@@ -1,10 +1,9 @@
-import * as THREE from 'three';
-import { BufferGeometry, Scene } from 'three';
-import { WireframedShape, WireframedShapeProps } from './WireframedShape';
+import { BufferGeometry, Scene, Group } from 'three';
+import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 
 export class Layer {
-    private group = new THREE.Group();
-    private wiredFramedShapes  = new Array<WireframedShape>();
+    private group = new Group();
+    private wiredFramedShapes  = new Array<WireframeShape>();
     constructor(scene, private rotationSpeed = { x : 0, y: 0, z: 0}) {
         this.group.rotation.x = this.rotationSpeed.x;
         this.group.rotation.y = this.rotationSpeed.y;
@@ -22,7 +21,7 @@ export class Layer {
         sceneObjectsProperties.forEach(
             (sceneObjectPoperties: WireframedShapeProps) => {
                 const { position, scale, rotation, color } = sceneObjectPoperties;
-                const basicMesh = new WireframedShape(scene, geometry, rotation, color, position, scale);
+                const basicMesh = new WireframeShape(scene, geometry, rotation, color, position, scale);
                 this.group.add(basicMesh.getWireframedMesh());
                 this.wiredFramedShapes.push(basicMesh);
             }

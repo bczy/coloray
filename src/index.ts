@@ -55,7 +55,7 @@ function initPostProcess(
     composer.addPass(new RenderPass(scene, camera));
     composer.addPass(new UnrealBloomPass({x: 256, y: 256}, 2));
     composer.addPass(new FilmPass(0.5, 2.5, 1024, false));
-    //composer.addPass(new GlitchPass(32));
+    composer.addPass(new GlitchPass(32));
     return composer;
 }
 

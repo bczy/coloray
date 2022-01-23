@@ -5,6 +5,7 @@ module.exports = webpackMerge(
     commonConfiguration,
     {
         mode: 'development',
+        devtool: 'source-map',
         devServer:
         {
             host: 'localhost',

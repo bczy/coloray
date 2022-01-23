@@ -12,7 +12,7 @@ export type WireframedShapeProps = {
     scale?: number;
 };
 
-export class WireframedShape {
+export class WireframeShape {
     private mesh : Mesh;
     constructor(
         private parent: Scene,

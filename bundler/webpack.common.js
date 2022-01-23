@@ -6,10 +6,9 @@ module.exports = {
     entry: path.resolve(__dirname, '../src/index.ts'),
     output:
     {
-        filename: 'bundle.[hash].js',
-        path: path.resolve(__dirname, '../dist')
+        filename: 'bundle.[fullhash].js',
+        path: path.resolve(__dirname, '../dist'),
     },
-    devtool: 'source-map',
     plugins:
     [
         new CopyWebpackPlugin([ { from: path.resolve(__dirname, '../static') } ]),
