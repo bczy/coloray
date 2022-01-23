@@ -1,63 +1,48 @@
 {
     "sceneObjectsProperties": [
         {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
+            "color": "rgb(255, 255, 255)",
             "position": [0, 0, 0],
             "rotationSpeed": -0.05
         },
         {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [3, 3, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [-3, 3, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [3, -3, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [-3, -3, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [-3, -3, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [4.5, 0, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
-            "position": [-4.5, 0, 0],
-            "rotationSpeed": -0.05
-        },
-        {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
+            "color": "rgb(0, 255, 120)",
             "position": [0, 4.5, 0],
             "rotationSpeed": -0.05
         },
         {
-            "color": "rgba(255, 255, 120)",
-            "scale": 0.25,
+            "color": "rgb(255, 255, 120)",
+            "position": [3, 3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [4.5, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [3, -3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(0, 255, 120)",
             "position": [0, -4.5, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [-3, -3, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [-4.5, 0, 0],
+            "rotationSpeed": -0.05
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [-3, 3, 0],
             "rotationSpeed": -0.05
         }
     ]

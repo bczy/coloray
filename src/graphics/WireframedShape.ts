@@ -20,15 +20,21 @@ export class WireframedShape {
         private rotationSpeed = { x: 0.01, y: 0.01, z: 0.01},
         private color = 0x00ff00,
         private position = [0, 0, 0], 
-        private scale = 1,
+        private scale = 0,
     ) {
         this.mesh = new Mesh(geometry),
         this.mesh.position.x = this.position[0];
         this.mesh.position.y = this.position[1];
         this.mesh.position.z = this.position[2];
-        this.mesh.scale.x = this.scale;
-        this.mesh.scale.y = this.scale;
-        this.mesh.scale.z = this.scale;
+        if (this.scale){
+            this.mesh.scale.x = this.scale;
+            this.mesh.scale.y = this.scale;
+            this.mesh.scale.z = this.scale;    
+        } else {
+            this.mesh.scale.x = 0.25;
+            this.mesh.scale.y= 0.25;
+            this.mesh.scale.z = 0.25;
+        }
         this.mesh.userData['type'] = this.geometry.type;
         this.createMaterial(this.color);
         this.parent.add(this.mesh);
@@ -36,9 +42,14 @@ export class WireframedShape {
     getWireframedMesh() : Mesh{
         return this.mesh;
     }
-    animate() {
+    animate(step: number) {
         this.mesh.rotation.x += this.rotationSpeed.x;
         this.mesh.rotation.y += this.rotationSpeed.y;
+        if (this.scale !== 0){
+            this.mesh.scale.setX(Math.cos(step * 0.05) * this.scale);
+            this.mesh.scale.setY(Math.cos(step * 0.05) * this.scale);
+            this.mesh.scale.setZ(Math.cos(step * 0.05) * this.scale);
+        }
     }
 
     createMaterial(color: number) : void {

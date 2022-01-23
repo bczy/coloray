@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import { BufferGeometry } from 'three';
+import { BufferGeometry, Scene } from 'three';
 import { WireframedShape, WireframedShapeProps } from './WireframedShape';
 
 export class Layer {
     private group = new THREE.Group();
     private wiredFramedShapes  = new Array<WireframedShape>();
-    constructor(scene, private rotationSpeed = { x : 0.01, y: 0.01, z: 0.01}) {
+    constructor(scene, private rotationSpeed = { x : 0, y: 0, z: 0}) {
         this.group.rotation.x = this.rotationSpeed.x;
         this.group.rotation.y = this.rotationSpeed.y;
         this.group.rotation.z = this.rotationSpeed.z;
@@ -13,7 +13,7 @@ export class Layer {
     }
 
     public async addFromJson(
-        scene,
+        scene : Scene,
         jsonPath: string,
         geometry: BufferGeometry
     ): Promise<void> {
@@ -32,6 +32,6 @@ export class Layer {
     public animate(step: number) {
         this.group.rotation.x += this.rotationSpeed.x;
         this.group.rotation.y += this.rotationSpeed.y;
-        this.wiredFramedShapes.forEach(wiredFramedShape => wiredFramedShape.animate())
+        this.wiredFramedShapes.forEach(wiredFramedShape => wiredFramedShape.animate(step))
     }
 }
