@@ -16,6 +16,11 @@ import { UnrealBloomPass } from './postprocessing/UnrealBloomPass';
 
 import { SceneObjectProps, BasicMesh, BasicMeshProps } from './graphics/BasicMesh';
 
+type SceneProps = {
+    scene: Scene;
+    camera: PerspectiveCamera;
+    composer: EffectComposer;
+}
 function onWindowResize(
     camera: PerspectiveCamera,
     renderer: WebGLRenderer
@@ -25,11 +30,7 @@ function onWindowResize(
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function initScene(): {
-    scene: Scene;
-    camera: PerspectiveCamera;
-    composer: WebGLRenderer;
-} {
+function initScene(): SceneProps  {
     const scene = new Scene();
     const renderer = new WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -86,7 +87,7 @@ function animate(
     sceneObjects.forEach((cube: SceneObjectProps) => {
         cube.animate(step);
     });
-    composer.render(scene, camera);
+    composer.render(scene);
     requestAnimationFrame(() =>
         animate(scene, camera, composer, sceneObjects, step)
     );
@@ -111,7 +112,7 @@ async function init() {
 
     window.addEventListener(
         'resize',
-        () => onWindowResize(camera, composer),
+        () => onWindowResize(camera, composer.renderer),
         false
     );
     animate(scene, camera, composer, gameObjects, 0);
