@@ -7,11 +7,11 @@ module.exports = webpackMerge(
         mode: 'development',
         devServer:
         {
-            host: '0.0.0.0',
+            host: 'localhost',
             contentBase: './dist',
-            open: true,
-            https: false,
-            useLocalIp: true
+            open: false,
+            https: true,
+            useLocalIp: false
         }
     }
 )

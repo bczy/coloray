@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack-dev-server --config ./bundler/webpack.dev.js",
+    "start": "webpack-dev-server --config ./bundler/webpack.dev.js",
     "depcheck": "depcheck"
   },
   "keywords": [],
