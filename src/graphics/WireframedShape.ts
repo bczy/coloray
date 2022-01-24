@@ -12,16 +12,22 @@ export type WireframedShapeProps = {
     scale?: number;
 };
 
+type Vec3 = { x: number, y: number, z: number };
 export class WireframeShape {
     private mesh : Mesh;
+
+    private rotationSpeed: Vec3;
+    private color: number;
+    private position: Array<number>
+    private scale = 0;
     constructor(
         private parent: Scene,
         private geometry: BufferGeometry,
-        private rotationSpeed = { x: 0.01, y: 0.01, z: 0.01},
-        private color = 0x00ff00,
-        private position = [0, 0, 0], 
-        private scale = 0,
+        { rotation, color, position, scale }: WireframedShapeProps
     ) {
+        this.rotationSpeed = rotation;
+        this.color = color || 0x00ff00;
+        this.position = position || [0, 0, 0];
         this.mesh = new Mesh(geometry),
         this.mesh.position.x = this.position[0];
         this.mesh.position.y = this.position[1];
@@ -39,22 +45,24 @@ export class WireframeShape {
         this.createMaterial(this.color);
         this.parent.add(this.mesh);
     }
-    getWireframedMesh() : Mesh{
-        return this.mesh;
-    }
-    animate(step: number) {
-        this.mesh.rotation.x += this.rotationSpeed.x;
-        this.mesh.rotation.y += this.rotationSpeed.y;
-        if (this.scale !== 0){
-            this.mesh.scale.setX(Math.cos(step * 0.05) * this.scale);
-            this.mesh.scale.setY(Math.cos(step * 0.05) * this.scale);
-            this.mesh.scale.setZ(Math.cos(step * 0.05) * this.scale);
-        }
-    }
 
-    createMaterial(color: number) : void {
+    private createMaterial(color: number): void {
         const material = new MeshBasicMaterial({ color });
         material.wireframe = true;
         this.mesh.material = material;
+    }
+
+    public getWireframedMesh(): Mesh {
+        return this.mesh;
+    }
+
+    public animate(step: number): void {
+        this.mesh.rotation.x += this.rotationSpeed.x;
+        this.mesh.rotation.y += this.rotationSpeed.y;
+        if (this.scale !== 0) {
+            this.mesh.scale.setX(Math.cos(step * 0.5) * 0.5 * (this.scale + 1));
+            this.mesh.scale.setY(Math.cos(step * 0.5) * 0.5 * (this.scale + 1));
+            this.mesh.scale.setZ(Math.cos(step * 0.5) * 0.5 * (this.scale + 1));
+        }
     }
 }
