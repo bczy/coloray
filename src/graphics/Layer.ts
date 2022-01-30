@@ -25,7 +25,8 @@ export class Layer {
         }
         sceneObjectsProperties.forEach(
             (sceneObjectPoperties: WireframedShapeProps) => {
-                const basicMesh = new WireframeShape(scene, geometry, sceneObjectPoperties);
+                const { position, scale, rotation, color } = sceneObjectPoperties;
+                const basicMesh = new WireframeShape(scene, geometry, rotation, color, position, scale);
                 this.group.add(basicMesh.getWireframedMesh());
                 this.wiredFramedShapes.push(basicMesh);
             }
