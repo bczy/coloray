@@ -1,4 +1,4 @@
-import { BufferGeometry, Scene, Group } from 'three';
+import { BufferGeometry, Scene, Group, Euler } from 'three';
 import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 
 export class Layer {
@@ -17,7 +17,12 @@ export class Layer {
         geometry: BufferGeometry
     ): Promise<void> {
         const rawJson = await fetch(jsonPath);
-        const { sceneObjectsProperties } = await rawJson.json();
+        const { sceneObjectsProperties, rotation } = await rawJson.json();
+        if (rotation) {
+            this.group.rotation.y = rotation.y;
+            this.group.rotation.z = rotation.z;
+            this.group.rotation.x = rotation.x;
+        }
         sceneObjectsProperties.forEach(
             (sceneObjectPoperties: WireframedShapeProps) => {
                 const { position, scale, rotation, color } = sceneObjectPoperties;
