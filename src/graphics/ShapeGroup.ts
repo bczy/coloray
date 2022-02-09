@@ -1,10 +1,10 @@
-import { BufferGeometry, Scene, Group, Euler } from 'three';
+import { BufferGeometry, Scene, Group } from 'three';
 import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 
 export class ShapeGroup {
   private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
-  constructor(scene, private rotationSpeed = { x: 0, y: 0, z: 0 }) {
+  constructor(scene: Scene, private rotationSpeed = { x: 0, y: 0, z: 0 }) {
     this.group.rotation.x = this.rotationSpeed.x;
     this.group.rotation.y = this.rotationSpeed.y;
     this.group.rotation.z = this.rotationSpeed.z;
@@ -32,8 +32,8 @@ export class ShapeGroup {
 
   protected initWireFrameShape(
     wireframedShapeProps: WireframedShapeProps,
-    scene,
-    geometry
+    scene: Scene,
+    geometry: BufferGeometry
   ) {
     const basicMesh = new WireframeShape(scene, geometry, wireframedShapeProps);
     this.group.add(basicMesh.getWireframedMesh());
