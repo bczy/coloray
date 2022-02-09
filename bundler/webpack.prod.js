@@ -1,11 +1,11 @@
-const webpackMerge = require('webpack-merge')
-const commonConfiguration = require('./webpack.common.js')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const path = require('path')
-const JsonMinimizerPlugin = require("json-minimizer-webpack-plugin");
+import webpackMerge from 'webpack-merge'
+import commonConfiguration from './webpack.common.js'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { resolve } from 'path'
+import JsonMinimizerPlugin from "json-minimizer-webpack-plugin"
 
-module.exports = webpackMerge(
+export default webpackMerge(
     commonConfiguration,
     {
         mode: 'production',
@@ -15,7 +15,7 @@ module.exports = webpackMerge(
                 verbose: true,
             }),
             new CopyWebpackPlugin([ { 
-                from: path.resolve(__dirname, '../static'),
+                from: resolve(__dirname, '../static'),
                 
             } ]),
             
