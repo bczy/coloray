@@ -1,5 +1,5 @@
 {
-    "rotation" : {"x": -0.01, "y": 0, "z": 0},
+    "rotation" : {"x": 0.1, "y": 0.1, "z": 0},
     "sceneObjectsProperties": [
         {
             "color": "rgb(255, 255, 255)",
