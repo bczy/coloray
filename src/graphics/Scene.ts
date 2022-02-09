@@ -49,16 +49,15 @@ export class Scene {
     this.composer.addPass(new FilmPass(0.5, 2.5, 1024, false));
     this.composer.addPass(new GlitchPass(32));
 
-    const sphereGeom = new SphereGeometry(undefined, 6, 6);
     const sphereLayer = new ShapeGroup(this.scene, {
       x: -0.01,
       y: 0,
       z: 0.01,
     });
-    sphereLayer.addFromJson(this.scene, '/assets/spheres.json', sphereGeom);
-
+    sphereLayer.addFromJson(this.scene, '/assets/spheres.json', new SphereGeometry(1.75, 3, 3));
+    
     this.sceneLayers.push(sphereLayer);
-
+    
     const extraSphereLayers = new Array<SphericalShapeGroup>();
     const boxGeom = new BoxGeometry(4, 4, 4);
     extraSphereLayers.push(
@@ -68,15 +67,14 @@ export class Scene {
         boxGeom,
         7.5,
         18
-      )
-    );
-
-
+        )
+        );
+        
     extraSphereLayers.push(
       new SphericalShapeGroup(
         this.scene,
         { x: -0.01, y: 0.0, z: 0 },
-        sphereGeom,
+        new SphereGeometry(1, 6, 6),
         5,
         16,
         0.875,
@@ -91,9 +89,9 @@ export class Scene {
       new SphericalShapeGroup(
         this.scene,
         { x: 0, y: 0.0, z: 0.01 },
-        sphereGeom,
-        1,
-        8
+        new SphereGeometry(1, 6, 6),
+        0.025,
+        2
       )
     );
     this.sceneLayers.push(...extraSphereLayers, sphereLayer);
