@@ -1,10 +1,24 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { resolve as _resolve } from 'path';
 
-module.exports = {
-    entry: path.resolve(__dirname, '../src/index.ts'),
-    output:
+export const entry = _resolve(__dirname, '../src/index.ts');
+export const output = {
+  filename: 'bundle.[fullhash].js',
+  path: _resolve(__dirname, '../dist'),
+};
+export const plugins = [
+  new CopyWebpackPlugin([{ from: _resolve(__dirname, '../static') }]),
+  new HtmlWebpackPlugin({
+    template: _resolve(__dirname, '../static/index.html'),
+    minify: true,
+  }),
+];
+export const resolve = {
+  extensions: ['.tsx', '.ts', '.js'],
+};
+export const module = {
+  rules: [
     {
         filename: 'bundle.[hash].js',
         path: path.resolve(__dirname, '../dist')
@@ -21,65 +35,37 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
-    module:
+    // JS
     {
-        rules:
-        [
-            {
-                test: /\.tsx?$/,
-                loader: 'ts-loader',
-                exclude: /node_modules/
-                
-            },
-            // HTML
-            {
-                test: /\.(html)$/,
-                use: ['html-loader']
-            },
-            // JS
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use:
-                [
-                    'babel-loader'
-                ]
-            },
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: ['babel-loader'],
+    },
 
-            // CSS
-            {
-                test: /\.css$/,
-                use:
-                [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
+    // CSS
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    },
 
-            // Images
-            {
-                test: /\.(jpg|png|gif|svg)$/,
-                use:
-                [
-                    {
-                        loader: 'file-loader',
-                        options:
-                        {
-                            outputPath: 'assets/images/'
-                        }
-                    }
-                ]
-            },
+    // Images
+    {
+      test: /\.(jpg|png|gif|svg)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/images/',
+          },
+        },
+      ],
+    },
 
-            // Shaders
-            {
-                test: /\.(glsl|vs|fs|vert|frag)$/,
-                exclude: /node_modules/,
-                use: [
-                    'raw-loader',
-                    'glslify-loader'
-                ]
-            }
-        ]
-    }
-}
+    // Shaders
+    {
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      exclude: /node_modules/,
+      use: ['raw-loader', 'glslify-loader'],
+    },
+  ],
+};
