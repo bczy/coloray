@@ -1,10 +1,10 @@
-import { BufferGeometry } from 'three';
+import { BufferGeometry, Scene } from 'three';
 import { ShapeGroup } from './ShapeGroup';
 import { WireframedShapeProps } from './WireframedShape';
 
 export class SphericalShapeGroup extends ShapeGroup {
   constructor(
-    scene,
+    scene: Scene,
     rotationSpeed = { x: 0, y: 0.1, z: 0 },
     geometry: BufferGeometry,
     radius: number,
@@ -30,6 +30,8 @@ export class SphericalShapeGroup extends ShapeGroup {
       wireframedShapeProps.color = colorPatterns
         ? colorPatterns[i % colorPatterns.length]
         : 0xccc000;
+        if (colorPatterns)
+        console.log(colorPatterns[i % colorPatterns.length]);
       shapProps.push(wireframedShapeProps);
     }
     shapProps.forEach((sceneObjectProperties) => {

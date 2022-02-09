@@ -29,8 +29,13 @@ export class Scene {
   );
   private composer: EffectComposer;
 
+  private easeLinear (t: number, b: number, c: number, d: number) {
+    return c * t / (d +b );
+  }
+
   private animate(): void {
     this.step++;
+    this.camera.position.z = Math.min(this.easeLinear(this.step, 0, 10, 1000), 15);
     this.sceneLayers.forEach((layer: ShapeGroup) => {
       layer.animate(this.step);
     });
@@ -41,7 +46,7 @@ export class Scene {
   constructor() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    this.camera.position.z = 15;
+    this.camera.position.z = 11.125;
 
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -54,19 +59,24 @@ export class Scene {
       y: 0,
       z: 0.01,
     });
-    sphereLayer.addFromJson(this.scene, '/assets/spheres.json', new SphereGeometry(1.75, 3, 3));
+    sphereLayer.addFromJson(this.scene, '/assets/spheres.json', new SphereGeometry(1.75, 4, 4));
     
     this.sceneLayers.push(sphereLayer);
     
     const extraSphereLayers = new Array<SphericalShapeGroup>();
-    const boxGeom = new BoxGeometry(4, 4, 4);
     extraSphereLayers.push(
       new SphericalShapeGroup(
         this.scene,
         { x: 0.0, y: -0.01, z: 0 },
-        boxGeom,
+        new BoxGeometry(4, 4, 4),
         7.5,
-        18
+        16,undefined,
+        [
+          0x00fF00,
+          0x00bb00,
+          0x006600,
+          0x002200,
+        ]
         )
         );
         
@@ -79,8 +89,7 @@ export class Scene {
         16,
         0.875,
         [
-          0x643a6d, 0x954a71, 0xbd616f, 0xd8816b, 0xe7a76d, 0xe4ab69, 0xdfb066,
-          0xdab463, 0xce954f, 0xc07641, 0xaf5837, 0x9b3930,
+          0x004433,
         ].map((i) => i / 4)
       )
     );

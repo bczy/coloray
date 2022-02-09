@@ -45,7 +45,7 @@ class GlitchPass extends Pass {
 
 		if ( this.curF % this.randX == 0 || this.goWild == true ) {
 
-			this.uniforms[ 'amount' ].value = Math.random() / 30;
+			this.uniforms[ 'amount' ].value = Math.random() / 20;
 			this.uniforms[ 'angle' ].value = MathUtils.randFloat( - Math.PI, Math.PI );
 			this.uniforms[ 'seed_x' ].value = MathUtils.randFloat( - 1, 1 );
 			this.uniforms[ 'seed_y' ].value = MathUtils.randFloat( - 1, 1 );
@@ -88,7 +88,7 @@ class GlitchPass extends Pass {
 
 	generateTrigger() {
 
-		this.randX = MathUtils.randInt( 120, 240 );
+		this.randX = MathUtils.randInt( 120, 480 );
 
 	}
 
@@ -98,7 +98,6 @@ class GlitchPass extends Pass {
 		const length = dt_size * dt_size;
 
 		for ( let i = 0; i < length; i ++ ) {
-
 			const val = MathUtils.randFloat( 0, 1 );
 			data_arr[ i * 3 + 0 ] = val;
 			data_arr[ i * 3 + 1 ] = val;
