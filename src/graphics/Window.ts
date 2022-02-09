@@ -1,4 +1,4 @@
-import { PerspectiveCamera, WebGLRenderer } from "three";
+import { PerspectiveCamera, WebGLRenderer } from 'three';
 
 export function onWindowResize(
     camera: PerspectiveCamera,

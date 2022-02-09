@@ -1,10 +1,10 @@
 import { BufferGeometry, Scene, Group, Euler } from 'three';
 import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 
-export class Layer {
+export class ShapeGroup {
     private group = new Group();
-    private wiredFramedShapes  = new Array<WireframeShape>();
-    constructor(scene, private rotationSpeed = { x : 0, y: 0, z: 0}) {
+    private wiredFramedShapes = new Array<WireframeShape>();
+    constructor(scene, private rotationSpeed = { x: 0, y: 0, z: 0 }) {
         this.group.rotation.x = this.rotationSpeed.x;
         this.group.rotation.y = this.rotationSpeed.y;
         this.group.rotation.z = this.rotationSpeed.z;
@@ -12,7 +12,7 @@ export class Layer {
     }
 
     public async addFromJson(
-        scene : Scene,
+        scene: Scene,
         jsonPath: string,
         geometry: BufferGeometry
     ): Promise<void> {
@@ -24,18 +24,30 @@ export class Layer {
             this.group.rotation.x = rotation.x;
         }
         sceneObjectsProperties.forEach(
-            (sceneObjectPoperties: WireframedShapeProps) => {
-                const { position, scale, rotation, color } = sceneObjectPoperties;
-                const basicMesh = new WireframeShape(scene, geometry, rotation, color, position, scale);
-                this.group.add(basicMesh.getWireframedMesh());
-                this.wiredFramedShapes.push(basicMesh);
+            (sceneObjectProperties: WireframedShapeProps) => {
+                this.initWireFrameShape(sceneObjectProperties, scene, geometry);
             }
         );
     }
-    
+
+    protected initWireFrameShape(
+        wireframedShapeProps: WireframedShapeProps,
+        scene,
+        geometry
+    ) {
+        const basicMesh = new WireframeShape(
+            scene,
+            geometry,
+            wireframedShapeProps
+        );
+        this.group.add(basicMesh.getWireframedMesh());
+        this.wiredFramedShapes.push(basicMesh);
+    }
     public animate(step: number) {
         this.group.rotation.x += this.rotationSpeed.x;
         this.group.rotation.y += this.rotationSpeed.y;
-        this.wiredFramedShapes.forEach(wiredFramedShape => wiredFramedShape.animate(step))
+        this.wiredFramedShapes.forEach((wiredFramedShape) =>
+            wiredFramedShape.animate(step)
+        );
     }
 }
