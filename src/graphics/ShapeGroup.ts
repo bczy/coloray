@@ -4,10 +4,10 @@ import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 export class ShapeGroup {
   private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
-  constructor(scene: Scene, private rotationSpeed = { x: 0, y: 0, z: 0 }) {
-    this.group.rotation.x = this.rotationSpeed.x;
-    this.group.rotation.y = this.rotationSpeed.y;
-    this.group.rotation.z = this.rotationSpeed.z;
+  constructor(scene: Scene, private rotationSpeed = { x: 0, y: 0, z: 0 }, initialRotation = { x: 0, y: 0, z: 0 }) {
+    this.group.rotation.x = initialRotation.x;
+    this.group.rotation.y = initialRotation.y;
+    this.group.rotation.z = initialRotation.z;
     scene.add(this.group);
   }
 
@@ -19,9 +19,7 @@ export class ShapeGroup {
     const rawJson = await fetch(jsonPath);
     const { sceneObjectsProperties, rotation } = await rawJson.json();
     if (rotation) {
-      this.rotationSpeed.y = rotation.y;
-      this.rotationSpeed.z = rotation.z;
-      this.rotationSpeed.x = rotation.x;
+      this.rotationSpeed = rotation;
     }
     sceneObjectsProperties.forEach(
       (sceneObjectProperties: WireframedShapeProps) => {

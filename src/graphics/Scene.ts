@@ -69,7 +69,7 @@ export class Scene {
     );
 
     this.sceneLayers.push(sphereLayer);
-    
+
     const extraSphereLayers = new Array<SphericalShapeGroup>();
 
     extraSphereLayers.push(
