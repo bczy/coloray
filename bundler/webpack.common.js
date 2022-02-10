@@ -1,6 +1,6 @@
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { resolve as _resolve } from 'path';
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 export const entry = _resolve(__dirname, '../src/index.ts');
 export const output = {
