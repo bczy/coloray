@@ -10,22 +10,24 @@ export class SphericalShapeGroup extends ShapeGroup {
     radius: number,
     steps = 27,
     initialScale = 0.5,
-    colorPatterns = undefined
+    colorPatterns = undefined,
+    z = 0,
+    initialRotation = { x: 0, y: 0, z: 0 },
   ) {
-    super(scene, rotationSpeed);
+    super(scene, rotationSpeed, initialRotation);
     const shapProps = new Array<WireframedShapeProps>();
     for (let i = 0; i < steps; i++) {
       const ipi2 = i * Math.PI * 2;
       const position = [];
       position[0] = radius * Math.cos(ipi2 / steps);
       position[1] = radius * Math.sin(ipi2 / steps);
-      position[2] = 0;
+      position[2] = z;
       const m = (i % 4 - 2) * 0.01;
       const rotation = {x: m, y: m, z: 0};
       let wireframedShapeProps: WireframedShapeProps = {
         position,
         initialScale,
-        rotation
+        rotation,
       };
       wireframedShapeProps.color = colorPatterns
         ? colorPatterns[i % colorPatterns.length]
