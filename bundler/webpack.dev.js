@@ -5,14 +5,13 @@ module.exports = webpackMerge(
     commonConfiguration,
     {
         mode: 'development',
-        devtool: 'source-map',
         devServer:
         {
-            host: 'localhost',
+            host: '0.0.0.0',
             contentBase: './dist',
-            open: false,
-            https: true,
-            useLocalIp: false
+            open: true,
+            https: false,
+            useLocalIp: true
         }
     }
 )
