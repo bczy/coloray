@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack-dev-server --config ./bundler/webpack.dev.js",
