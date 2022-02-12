@@ -2,11 +2,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "files": ["dist"],
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack-dev-server --config ./bundler/webpack.dev.js",
     "start": "webpack-dev-server --config ./bundler/webpack.dev.js",
+    "deploy": "npm run build && gh-pages -d dist -b master",
     "depcheck": "depcheck"
   },
   "keywords": [],
@@ -19,6 +22,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.2.3",
     "glslify-loader": "^2.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.5.2",
