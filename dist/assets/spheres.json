@@ -1,0 +1,132 @@
+{
+  "rotation": { "x": 0, "y": 0.01, "z": 0 },
+  "sceneObjectsProperties": [
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, 2, 0],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, -2, 0],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 0, 0],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 2, 0],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, -2, 0],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, -2, 0],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, 2, 0],
+      "rotationSpeed": -0.05
+    },
+
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, 0, 2],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, -2, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, 2, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 0, 2],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 2, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, -2, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, -2, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, 0, 2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, 2, 2],
+      "rotationSpeed": 0.05
+    },
+
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, 0, -2],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, -2, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [0, 2, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 0, -2],
+      "rotationSpeed": -0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, 2, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [2, -2, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, -2, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, 0, -2],
+      "rotationSpeed": 0.05
+    },
+    {
+      "color": "rgb(90, 160, 125)",
+      "position": [-2, 2, -2],
+      "rotationSpeed": 0.05
+    }
+  ]
+}
