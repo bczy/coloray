@@ -29,10 +29,10 @@ export class Scene {
   );
   private composer: EffectComposer;
 
-  private easeInOutQuad (t: number, b: number, c: number, d: number) {
-    if ((t /= d / 2) < 1) return c / 2 * t * t + b;
-    return -c / 2 * ((--t) * (t - 2) - 1) + b;
-}
+  private easeInOutQuad(t: number, b: number, c: number, d: number) {
+    if ((t /= d / 2) < 1) return (c / 2) * t * t + b;
+    return (-c / 2) * (--t * (t - 2) - 1) + b;
+  }
   private animate(): void {
     this.step++;
     this.camera.position.z = Math.min(
@@ -89,7 +89,7 @@ export class Scene {
         ],
         undefined,
         { x: 0, y: 90, z: 0 }
-      ),
+      )
     );
 
     extraSphereLayers.push(
