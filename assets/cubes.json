@@ -1,0 +1,51 @@
+{
+    "rotation" : {"x": 0.1, "y": 0.1, "z": 0},
+    "sceneObjectsProperties": [
+        {
+            "color": "rgb(255, 255, 255)",
+            "position": [0, 0, 0],
+            "initialScale" : 0.33,
+            "rotationSpeed": {"x": 0, "y": 0.01, "z": 0}
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [0, 4.5, 0],
+            "rotationSpeed": {"x": -0.01, "y": 0, "z": 0}
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [3, 3, 0],
+            "rotationSpeed": {"x": 0.01, "y": 0, "z": 0}
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [4.5, 0, 0],
+            "rotationSpeed": {"x": 0, "y": 0.01, "z": 0}
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [3, -3, 0],
+            "rotationSpeed": {"x": 0, "y": -0.01, "z": 0}
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [0, -4.5, 0],
+            "rotationSpeed": {"x": 0.01, "y": 0, "z": 0}
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [-3, -3, 0],
+            "rotationSpeed": {"x": 0, "y": -0.01, "z": 0}
+        },
+        {
+            "color": "rgb(0, 255, 120)",
+            "position": [-4.5, 0, 0],
+            "rotationSpeed": {"x": 0, "y": 0.01, "z": 0}
+        },
+        {
+            "color": "rgb(255, 255, 120)",
+            "position": [-3, 3, 0],
+            "rotationSpeed": {"x": -0.01, "y": 0, "z": 0}
+        }
+    ]
+}
