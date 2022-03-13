@@ -16,6 +16,7 @@ export class WireframeShape {
     y: 0,
     z: 0,
   };
+  
   constructor(
     private geometry: BufferGeometry,
     {

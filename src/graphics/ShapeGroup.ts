@@ -1,26 +1,26 @@
-import { Group, Mesh } from 'three';
+import { BufferGeometry, Group, Mesh } from 'three';
 import { WireframeShape, WireframedShapeData } from './WireframedShape';
 
-export type GroupData = {
-  wireframedShapesData: Array<WireframedShapeData>;
-  rotation: { x: number; y: number; z: number };
+type VectorThree = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+export type ShapeGroupData = {
+  rotationSpeed: VectorThree;
+  wireframedShapes: Array<WireframedShapeData>;
+  geometry: BufferGeometry;
 };
 export class ShapeGroup {
   private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
-  private rotationSpeed: any;
+  private rotationSpeed: VectorThree;
 
-  constructor({ initialRotation = { x: 0, y: 0, z: 0 }, shapeData, geometry }) {
-    this.group.rotation.x = initialRotation.x;
-    this.group.rotation.y = initialRotation.y;
-    this.group.rotation.z = initialRotation.z;
+  constructor({ rotationSpeed, wireframedShapes, geometry }: ShapeGroupData) {
+    this.rotationSpeed = rotationSpeed;
 
-    const { wireframedShapesData, rotation } = shapeData;
-    if (rotation) {
-      this.rotationSpeed = rotation;
-    }
-    
-    wireframedShapesData.forEach((wireframedShapeData: WireframedShapeData) => {
+    wireframedShapes.forEach((wireframedShapeData: WireframedShapeData) => {
       const wiredFramedShape = new WireframeShape(
         geometry,
         wireframedShapeData

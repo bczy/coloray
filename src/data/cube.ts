@@ -1,8 +1,10 @@
-import { GroupData } from '../graphics/ShapeGroup';
+import { CylinderBufferGeometry } from 'three';
+import { ShapeGroupData } from '../graphics/ShapeGroup';
 
-export const groupData: GroupData = {
-  rotation: { x: 0, y: 0.01, z: 0 },
-  wireframedShapesData: [
+export const cube: ShapeGroupData = {
+  geometry: new CylinderBufferGeometry(1, 1, 1, 32),
+  rotationSpeed: { x: 0, y: 0.01, z: 0 },
+  wireframedShapes: [
     {
       color: 'rgb(0, 60, 125)',
       position: [0, 2, 0],

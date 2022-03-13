@@ -1,1 +1,3 @@
-export const shapeGroups = [];
+import { cube } from './cube';
+
+export const shapeGroups = [cube];
