@@ -32,8 +32,7 @@ export class SphericalShapeGroup extends ShapeGroup {
       wireframedShapeProps.color = colorPatterns
         ? colorPatterns[i % colorPatterns.length]
         : 0xccc000;
-        if (colorPatterns)
-        console.log(colorPatterns[i % colorPatterns.length]);
+        
       shapProps.push(wireframedShapeProps);
     }
     shapProps.forEach((sceneObjectProperties) => {

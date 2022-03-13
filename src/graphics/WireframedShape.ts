@@ -1,9 +1,10 @@
 import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from 'three';
 
 export type WireframedShapeProps = {
-  color?: number;
+  color?: number | string;
   position?: number[];
   rotation?: { x: number; y: number; z: number };
+  rotationSpeed?: number;
   scale?: number;
   initialScale?: number;
 };

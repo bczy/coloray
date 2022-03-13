@@ -1,6 +1,10 @@
 import { BufferGeometry, Scene, Group } from 'three';
 import { WireframeShape, WireframedShapeProps } from './WireframedShape';
 
+export type GroupData = {
+  sceneObjectsProperties: Array<WireframedShapeProps>;
+  rotation:  { x: number; y: number; z: number };
+};
 export class ShapeGroup {
   private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
@@ -11,13 +15,12 @@ export class ShapeGroup {
     scene.add(this.group);
   }
 
-  public async addFromJson(
+  public async initGroup(
     scene: Scene,
-    jsonPath: string,
+    data: GroupData,
     geometry: BufferGeometry
   ): Promise<void> {
-    const rawJson = await fetch(jsonPath);
-    const { sceneObjectsProperties, rotation } = await rawJson.json();
+    const { sceneObjectsProperties, rotation } = data;
     if (rotation) {
       this.rotationSpeed = rotation;
     }

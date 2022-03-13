@@ -1,4 +1,4 @@
-{
+const daCubde = {
   "rotation": { "x": 0, "y": 0.01, "z": 0 },
   "sceneObjectsProperties": [
     {

@@ -17,6 +17,8 @@ import { ShapeGroup } from './ShapeGroup';
 import { SphericalShapeGroup } from './SphericalShapeGroup';
 import { onWindowResize } from './Window';
 
+import { daCube } from '../data/spheres';
+
 export class Scene {
   private step = 0;
   private scene = new ThreeScene();
@@ -62,9 +64,9 @@ export class Scene {
       y: 0,
       z: 0.01,
     });
-    sphereLayer.addFromJson(
+    sphereLayer.initGroup(
       this.scene,
-      '/assets/spheres.json',
+      daCube,
       new SphereGeometry(1.75, 4, 4)
     );
 
