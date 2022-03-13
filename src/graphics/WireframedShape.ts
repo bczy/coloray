@@ -1,9 +1,8 @@
-import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from 'three';
+import { BufferGeometry, Mesh, MeshBasicMaterial } from 'three';
 
-export type WireframedShapeProps = {
+export type WireframedShapeData = {
   color?: number | string;
   position?: number[];
-  rotation?: { x: number; y: number; z: number };
   rotationSpeed?: number;
   scale?: number;
   initialScale?: number;
@@ -11,23 +10,20 @@ export type WireframedShapeProps = {
 
 export class WireframeShape {
   private mesh: Mesh;
+  private scaleFactor: number;
   private rotationSpeed: { x: number; y: number; z: number } = {
     x: 0,
     y: 0,
     z: 0,
   };
-  private scaleFactor: number;
-
   constructor(
-    private parent: Scene,
     private geometry: BufferGeometry,
     {
       position,
       scale = 0,
-      rotation,
       color,
       initialScale = 0,
-    }: WireframedShapeProps
+    }: WireframedShapeData
   ) {
     const material = new MeshBasicMaterial({ color });
     this.mesh = new Mesh(this.geometry);
@@ -35,25 +31,24 @@ export class WireframeShape {
     this.mesh.material = material;
 
     this.scaleFactor = scale;
-    this.rotationSpeed = rotation || this.rotationSpeed;
+    this.rotationSpeed = this.rotationSpeed;
     this.mesh.position.x = position[0];
     this.mesh.position.y = position[1];
     this.mesh.position.z = position[2];
-    if (initialScale) {
-      this.mesh.scale.x = initialScale;
-      this.mesh.scale.y = initialScale;
-      this.mesh.scale.z = initialScale;
-    } else {
-      this.mesh.scale.x = 0.375;
-      this.mesh.scale.y = 0.375;
-      this.mesh.scale.z = 0.375;
-    }
 
-    this.parent.add(this.mesh);
+    if (initialScale) {
+      this.mesh.scale.x = initialScale | 0.375;
+      this.mesh.scale.y = initialScale | 0.375;
+      this.mesh.scale.z = initialScale | 0.375;
+    }
   }
 
-  public getWireframedMesh(): Mesh {
+  public getMesh(): Mesh {
     return this.mesh;
+  }
+
+  public getGeometry(): BufferGeometry {
+    return this.geometry;
   }
 
   public animate(step: number): void {

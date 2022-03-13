@@ -1,45 +1,41 @@
-import { BufferGeometry, Scene, Group } from 'three';
-import { WireframeShape, WireframedShapeProps } from './WireframedShape';
+import { Group, Mesh } from 'three';
+import { WireframeShape, WireframedShapeData } from './WireframedShape';
 
 export type GroupData = {
-  sceneObjectsProperties: Array<WireframedShapeProps>;
-  rotation:  { x: number; y: number; z: number };
+  wireframedShapesData: Array<WireframedShapeData>;
+  rotation: { x: number; y: number; z: number };
 };
 export class ShapeGroup {
   private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
-  constructor(scene: Scene, private rotationSpeed = { x: 0, y: 0, z: 0 }, initialRotation = { x: 0, y: 0, z: 0 }) {
+  private rotationSpeed: any;
+
+  constructor({ initialRotation = { x: 0, y: 0, z: 0 }, shapeData, geometry }) {
     this.group.rotation.x = initialRotation.x;
     this.group.rotation.y = initialRotation.y;
     this.group.rotation.z = initialRotation.z;
-    scene.add(this.group);
-  }
 
-  public async initGroup(
-    scene: Scene,
-    data: GroupData,
-    geometry: BufferGeometry
-  ): Promise<void> {
-    const { sceneObjectsProperties, rotation } = data;
+    const { wireframedShapesData, rotation } = shapeData;
     if (rotation) {
       this.rotationSpeed = rotation;
     }
-    sceneObjectsProperties.forEach(
-      (sceneObjectProperties: WireframedShapeProps) => {
-        this.initWireFrameShape(sceneObjectProperties, scene, geometry);
-      }
+    
+    wireframedShapesData.forEach((wireframedShapeData: WireframedShapeData) => {
+      const wiredFramedShape = new WireframeShape(
+        geometry,
+        wireframedShapeData
+      );
+      this.group.add(wiredFramedShape.getMesh());
+      this.wiredFramedShapes.push(wiredFramedShape);
+    });
+  }
+
+  public getMeshes(): Array<Mesh> {
+    return this.wiredFramedShapes.map((wiredFramedShape) =>
+      wiredFramedShape.getMesh()
     );
   }
 
-  protected initWireFrameShape(
-    wireframedShapeProps: WireframedShapeProps,
-    scene: Scene,
-    geometry: BufferGeometry
-  ) {
-    const basicMesh = new WireframeShape(scene, geometry, wireframedShapeProps);
-    this.group.add(basicMesh.getWireframedMesh());
-    this.wiredFramedShapes.push(basicMesh);
-  }
   public animate(step: number) {
     this.group.rotation.x += this.rotationSpeed.x;
     this.group.rotation.y += this.rotationSpeed.y;
