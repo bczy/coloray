@@ -13,9 +13,10 @@ export type ShapeGroupData = {
   geometry: BufferGeometry;
 };
 export class ShapeGroup {
-  private group = new Group();
   private wiredFramedShapes = new Array<WireframeShape>();
   private rotationSpeed: VectorThree;
+
+  public group = new Group();
 
   constructor({ rotationSpeed, wireframedShapes, geometry }: ShapeGroupData) {
     this.rotationSpeed = rotationSpeed;
@@ -26,14 +27,7 @@ export class ShapeGroup {
         wireframedShapeData
       );
       this.group.add(wiredFramedShape.getMesh());
-      this.wiredFramedShapes.push(wiredFramedShape);
     });
-  }
-
-  public getMeshes(): Array<Mesh> {
-    return this.wiredFramedShapes.map((wiredFramedShape) =>
-      wiredFramedShape.getMesh()
-    );
   }
 
   public animate(step: number) {
